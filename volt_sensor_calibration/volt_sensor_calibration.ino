@@ -16,7 +16,7 @@ void loop() {
   float rawVolt4 = analogRead(analogPin);
   float avgVolt = (rawVolt1 + rawVolt2 + rawVolt3 + rawVolt4) / 4;
   float volt = (avgVolt / 1023.0) * 250.0;
-  float newVolt = (volt / cf) + 1;
+  float newVolt = (volt / cf) - 9;
   Serial.println(newVolt);
   // delay(1000);
   // Serial.println(volt);
