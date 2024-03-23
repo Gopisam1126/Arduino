@@ -1,5 +1,6 @@
-const int tempPin1 = A0;
-const int tempPin2 = A1;
+const int tempPin1 = A3;
+const int tempPin2 = A5;
+const int cf = 2;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,7 +14,7 @@ void loop() {
   delay(1000);
   float rawTemp2a = analogRead(tempPin1);
   float sensor1 = actVal(rawTemp1a, rawTemp2a);
-  float lm35a = sensor1 - 10;
+  float lm35a = sensor1;
 
   // Sensor 2
   float rawTemp1b = analogRead(tempPin2);
@@ -23,20 +24,13 @@ void loop() {
 
   // printData
   printData(lm35a, lm35b);
-  // delay(2000);
-  // printData(lm35a, lm35b);
-
-  // float avgTempa = (rawTemp1a + rawTemp2a) / 1.7;
-  // float tempVolt = avgTempa * (5.0 / 1023.0);
-  // float temp = (tempVolt - 0.5) * 100.0;
-  // float newTemp = temp - 11;
 }
 
 float actVal(float s1, float s2) {
-  float avg = (s1 + s2) / 1.7;
+  float avg = (s1 + s2) / 2;
   float tempVolt = avg * (5.0 / 1023.0);
   float temp = (tempVolt - 0.5) * 100.0;
-  float newTemp = temp - 11;
+  float newTemp = (temp - 11);
   return newTemp;
 }
 
