@@ -33,76 +33,65 @@ void loop() {
   if(currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
 
-      // if (currentMillis == 3600000) {
-        // open data.txt
+      // open data.txt
 
-        dataFile = SD.open("/data.txt", FILE_WRITE);
+      dataFile = SD.open("/data.txt", FILE_WRITE);
 
-        if (dataFile) {
+      if (dataFile) {
       
-          float v1 = readVoltage(VSPin1);
-          float v2 = readVoltage(VSPin2);
-          float c1 = readCurrent(CSPin1);
-          float c2 = readCurrent(CSPin2);
-          float t1 = readTemp(tempPin1);
-          float t2 = readTemp(tempPin2);
-          
-          float newT2 = t2 / 2;
-          float newT1 = t1 + 2;
-
-          // write data to data.txt
-      
-          dataFile.print("---------------------------------------------------------------------- \n");
-          dataFile.print("Data Set 1 : \n");
-          dataFile.print("---------------------------------------------------------------------- \n");
-          dataFile.print("Voltage 1 : ");
-          dataFile.print(v1);
-          dataFile.print("\n");
-          dataFile.print("Current 1 : ");
-          dataFile.print(c1);
-          dataFile.print("\n");
-          dataFile.print("Temperature 1 : ");
-          dataFile.print(newT1);
-          dataFile.print("\n\n");
-          dataFile.print("---------------------------------------------------------------------- \n");
-          dataFile.print("Data Set 2 : \n");
-          dataFile.print("---------------------------------------------------------------------- \n");
-          dataFile.print("Voltage 2 : ");
-          dataFile.print(v2);
-          dataFile.print("\n");
-          dataFile.print("Current 2 : ");
-          dataFile.print(c2);
-          dataFile.print("\n");
-          dataFile.print("Temperature 2 : ");
-          dataFile.println(newT2);
-          dataFile.println("\n\n");
-
-          //close data.txt
-
-           dataFile.close();
-
-        } else {
-          Serial.println("Error opening data.txt!");
-        }
-      // }
-
-      // print data to Serial Monitor
-
       float v1 = readVoltage(VSPin1);
       float v2 = readVoltage(VSPin2);
       float c1 = readCurrent(CSPin1);
       float c2 = readCurrent(CSPin2);
       float t1 = readTemp(tempPin1);
       float t2 = readTemp(tempPin2);
-
+      
       float newT2 = t2 / 2;
       float newT1 = (t1 / 2) + 7;
+
+      // print data to Serial Monitor
 
       Serial.println("\nData Set 1 : \t");
       printData(v1, c1, newT1);
 
       Serial.println("\nData Set 2 : \t");
       printData(v2, c2, newT2);
+
+      // write data to data.txt
+  
+      dataFile.print("---------------------------------------------------------------------- \n");
+      dataFile.print("Data Set 1 : \n");
+      dataFile.print("---------------------------------------------------------------------- \n");
+      dataFile.print("Voltage 1 : ");
+      dataFile.print(v1);
+      dataFile.print("\n");
+      dataFile.print("Current 1 : ");
+      dataFile.print(c1);
+      dataFile.print("\n");
+      dataFile.print("Temperature 1 : ");
+      dataFile.print(newT1);
+      dataFile.print("\n\n");
+      dataFile.print("---------------------------------------------------------------------- \n");
+      dataFile.print("Data Set 2 : \n");
+      dataFile.print("---------------------------------------------------------------------- \n");
+      dataFile.print("Voltage 2 : ");
+      dataFile.print(v2);
+      dataFile.print("\n");
+      dataFile.print("Current 2 : ");
+      dataFile.print(c2);
+      dataFile.print("\n");
+      dataFile.print("Temperature 2 : ");
+      dataFile.println(newT2);
+      dataFile.println("\n\n");
+      
+      //close data.txt
+
+      dataFile.close();
+
+    } else {
+      Serial.println("Error opening data.txt!");
+    }
+
   }
 
   delay(600000); //prevent excessive logging
