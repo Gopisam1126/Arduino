@@ -2,9 +2,17 @@ const int tempPin1 = A3;
 const int tempPin2 = A5;
 const int cf = 2;
 
+File dataFile;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+
+  if (!SD.begin(ss)) {
+    Serial.println(("SD card initialization failed!"));
+  }
+  Serial.println("SD card initialization Successfull.
+  ")
 }
 
 void loop() {
